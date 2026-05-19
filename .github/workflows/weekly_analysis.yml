@@ -4,7 +4,7 @@ name: Weekly SharePoint Analysis
 on:
   schedule:
     # Runs at 08:00 AM every Monday (UTC time)
-    - cron: '0 3 * * 5'
+    - cron: '0 13 * * 2'
   workflow_dispatch: # Allows you to manually trigger the script anytime via the UI for testing
 
 jobs:

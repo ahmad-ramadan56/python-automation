@@ -1,0 +1,38 @@
+name: Weekly SharePoint Analysis
+
+# Controls when the action will run
+on:
+  schedule:
+    # Runs at 08:00 AM every Monday (UTC time)
+    - cron: '0 3 * * 5'
+  workflow_dispatch: # Allows you to manually trigger the script anytime via the UI for testing
+
+jobs:
+  run-analysis-script:
+    runs-on: ubuntu-latest
+
+    steps:
+      # 1. Pull down the latest code from your public repo
+      - name: Checkout Repository Code
+        uses: actions/checkout@v4
+
+      # 2. Set up a clean Python environment on the virtual machine
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.10'
+          cache: 'pip' # Optimizes speed for weekly runs
+
+      # 3. Install your required libraries (pandas, office365-sdk, etc.)
+      - name: Install Dependencies
+        run: |
+          python -m pip install --upgrade pip
+          if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
+
+      # 4. Run the script and map the GitHub Secrets to the script's Environment Variables
+      - name: Execute Python Script
+        env:
+          TENANT_ID: ${{ secrets.AZURE_TENANT_ID }}
+          CLIENT_ID: ${{ secrets.AZURE_CLIENT_ID }}
+          CLIENT_SECRET: ${{ secrets.AZURE_CLIENT_SECRET }}
+        run: python project_highlights.py

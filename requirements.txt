@@ -1,0 +1,2 @@
+Office365-REST-Python-Client>=2.5.0
+pandas>=2.0.0

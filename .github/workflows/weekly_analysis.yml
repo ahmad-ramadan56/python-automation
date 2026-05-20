@@ -3,9 +3,9 @@ name: Weekly SharePoint Analysis
 # Controls when the action will run
 
 on:
-  schedule:
-    - cron: '*/5 * * * *'
   workflow_dispatch:
+  schedule:
+    - cron: "*/7 * * * *"
 
 jobs:
   run-analysis-script:

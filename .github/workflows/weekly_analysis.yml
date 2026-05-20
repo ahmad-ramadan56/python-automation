@@ -11,9 +11,6 @@ jobs:
   run-analysis-script:
     runs-on: ubuntu-latest
     
-    env:
-      FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: 'true'
-    
     steps:
       # 1. Pull down the latest code from your public repo
       - name: Checkout Repository Code
@@ -35,6 +32,7 @@ jobs:
       # 4. Run the script and map the GitHub Secrets to the script's Environment Variables
       - name: Execute Python Script
         env:
+          FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: 'true'
           TENANT_ID: ${{ secrets.AZURE_TENANT_ID }}
           CLIENT_ID: ${{ secrets.AZURE_CLIENT_ID }}
           CLIENT_SECRET: ${{ secrets.AZURE_CLIENT_SECRET }}

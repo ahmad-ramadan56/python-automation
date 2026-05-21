@@ -5,7 +5,7 @@ name: Weekly SharePoint Analysis
 on:
   workflow_dispatch:
   schedule:
-    - cron: "0 */1 * * *"
+    - cron: "0 5 * * 5"
 
 jobs:
   run-analysis-script:
